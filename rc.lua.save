@@ -1,8 +1,5 @@
 os.setlocale(os.getenv("LANG"))
 
--- Set D-bus
-local dbus = require("dbus")
-
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -23,7 +20,7 @@ beautiful.init("/home/clutcher/.config/awesome/themes/my/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "sakura"
-editor = os.getenv("EDITOR") or "subl"
+editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -210,11 +207,6 @@ globalkeys = awful.util.table.join(
             end
         end),
 
-    -- Monitors manipulation
-    awful.key({modkey,            }, "F1",     function () awful.screen.focus(1) end),
-    awful.key({modkey,            }, "F2",     function () awful.screen.focus(2) end),
-    awful.key({modkey}, "o", awful.client.movetoscreen),
-
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -321,6 +313,15 @@ awful.rules.rules = {
                      focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
+    { rule = { class = "MPlayer" },
+      properties = { floating = true } },
+    { rule = { class = "pinentry" },
+      properties = { floating = true } },
+    { rule = { class = "gimp" },
+      properties = { floating = true } },
+    -- Set Firefox to always map on tags number 2 of screen 1.
+    -- { rule = { class = "Firefox" },
+    --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
@@ -356,6 +357,3 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
-
-awful.util.spawn_with_shell("volti")
---awful.util.spawn_with_shell("wicd-client")
