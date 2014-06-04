@@ -213,7 +213,7 @@ globalkeys = awful.util.table.join(
     -- Monitors manipulation
     awful.key({modkey,            }, "F1",     function () awful.screen.focus(1) end),
     awful.key({modkey,            }, "F2",     function () awful.screen.focus(2) end),
-    awful.key({modkey}, "o", awful.client.movetoscreen),
+    awful.key({modkey}, "`", awful.client.movetoscreen),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
@@ -321,6 +321,8 @@ awful.rules.rules = {
                      focus = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
+    { rule = { class = "Chromium" },
+      properties = { floating = false } },
 }
 -- }}}
 
