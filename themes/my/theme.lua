@@ -8,8 +8,8 @@
 
 -- {{{ Main
 theme = {}
--- theme.wallpaper_cmd = { "awsetbg -a /home/clutcher/.config/awesome/themes/my/Girls/6.jpg" }
-   theme.wallpaper_cmd = { "awsetbg -a /home/clutcher/.config/awesome/themes/my/Cats/2.jpg" }
+theme.wallpaper_cmd = { "awsetbg -a /home/clutcher/.config/awesome/themes/my/Programers/7.jpg" }
+   -- theme.wallpaper_cmd = { "awsetbg -a /home/clutcher/.config/awesome/themes/my/Cats/2.jpg" }
 -- }}}
 
 -- {{{ Styles
