@@ -184,6 +184,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
+ 	awful.key({                   }, "Print", function () awful.util.spawn_with_shell("import -frame ~/screenshots/$(date +%F_%H:%M:%S).png") end),
+ 	awful.key({ modkey,           }, "Print", function () awful.util.spawn_with_shell("import -window root ~/screenshots/$(date +%F_%H:%M:%S).png") end),
+
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
