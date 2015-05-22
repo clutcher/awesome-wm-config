@@ -84,6 +84,14 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 -- Create a textclock widget
 mytextclock = awful.widget.textclock({ align = "right" })
 
+-- Memory widget
+memwidget = widget({ type = "textbox" })
+vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB/$3MB)", 13)
+
+-- CPU widget
+cpuwidget = widget({ type = "textbox" })
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
+
 -- Create a systray
 mysystray = widget({ type = "systray" })
 
@@ -163,6 +171,8 @@ for s = 1, screen.count() do
         },
         mylayoutbox[s],
         mytextclock,
+        memwidget,
+        cpuwidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -179,13 +189,19 @@ root.buttons(awful.util.table.join(
 -- }}}
 
 -- {{{ Key bindings
+
 globalkeys = awful.util.table.join(
+    -- Lockscreen
+	awful.key({ modkey,           }, "l",      function () awful.util.spawn_with_shell("dm-tool lock")  end),
+
+	-- Print screen
+ 	awful.key({                   }, "Print", function () awful.util.spawn_with_shell("import -frame ~/screenshots/$(date +%F_%H:%M:%S).png") end),
+ 	awful.key({ modkey,           }, "Print", function () awful.util.spawn_with_shell("import -window root ~/screenshots/$(date +%F_%H:%M:%S).png") end),
+
+ 	-- Awesome bindings
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
-
- 	awful.key({                   }, "Print", function () awful.util.spawn_with_shell("import -frame ~/screenshots/$(date +%F_%H:%M:%S).png") end),
- 	awful.key({ modkey,           }, "Print", function () awful.util.spawn_with_shell("import -window root ~/screenshots/$(date +%F_%H:%M:%S).png") end),
 
     awful.key({ modkey,           }, "j",
         function ()
@@ -214,8 +230,10 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Monitors manipulation
-    awful.key({modkey,            }, "F1",     function () awful.screen.focus(1) end),
-    awful.key({modkey,            }, "F2",     function () awful.screen.focus(2) end),
+    awful.key({modkey,            }, "F1",     function () awful.screen.focus(2) end),
+    awful.key({modkey,            }, "F2",     function () awful.screen.focus(1) end),
+    awful.key({modkey,            }, "F3",     function () awful.screen.focus(3) end),
+
     awful.key({modkey}, "`", awful.client.movetoscreen),
 
     -- Standard program
@@ -364,3 +382,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 awful.util.spawn_with_shell("volti")
 --awful.util.spawn_with_shell("wicd-client")
+
+-- Xrandr 3-monitor setup
+awful.util.spawn_with_shell("xrandr --output DP1-1 --left-of eDP1")
+awful.util.spawn_with_shell("xrandr --output DP1-2 --right-of eDP1")
