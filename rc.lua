@@ -53,7 +53,7 @@ end
 beautiful.init("/home/clutcher/.config/awesome/themes/my/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "sakura"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "subl"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -73,7 +73,7 @@ local layouts =
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
+    awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max,
@@ -93,7 +93,7 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names = {"www", "dev", "term", "im", "other", "music"}
+    names = {"www", "dev", "term", "music", "ingress"}
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -421,12 +421,8 @@ awful.rules.rules = {
                      raise = true,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "MPlayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+    { rule = { class = "Gnome-terminal" },
+  	properties = { size_hints_honor = false } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -513,5 +509,8 @@ awful.util.spawn_with_shell("volti")
 --awful.util.spawn_with_shell("wicd-client")
 
 -- Xrandr 3-monitor setup
-awful.util.spawn_with_shell("xrandr --output DP1-1 --right-of eDP1")
-awful.util.spawn_with_shell("xrandr --output DP1-2 --right-of DP1-1")
+--awful.util.spawn_with_shell("xrandr --output eDP1 --off")
+awful.util.spawn_with_shell("xrandr --output DP1-1 --right-of HDMI1 --mode 1920x1080")
+awful.util.spawn_with_shell("xrandr --output DP1-2 --right-of DP1-1 --mode 1920x1080")
+awful.util.spawn_with_shell("xrandr --output DP1-2 --rotate right")
+awful.util.spawn_with_shell("xrandr --output HDMI1 --rotate left")
