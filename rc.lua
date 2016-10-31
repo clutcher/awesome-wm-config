@@ -52,6 +52,21 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/clutcher/.config/awesome/themes/my/theme.lua")
 
+-- Java 1.8 float windows fix
+function delay_raise ()
+   -- 5 ms ages in computer time, but I won't notice it.
+   local raise_timer = timer { timeout = 0.005 }
+   raise_timer:connect_signal("timeout",
+       function()
+          if client.focus then
+             client.focus:raise()
+          end
+          raise_timer:stop()
+   end)
+   raise_timer:start()
+end
+
+
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "subl"
@@ -86,6 +101,11 @@ local layouts =
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        -- if s < 3 then
+          -- gears.wallpaper.maximized(beautiful.wallpaper, s, true)
+        -- else
+        --   gears.wallpaper.maximized("/home/clutcher/.config/awesome/themes/my/Programers/python_code_vertical.jpg", s, true)
+        -- end
     end
 end
 -- }}}
@@ -194,11 +214,11 @@ mytasklist.buttons = awful.util.table.join(
                                           end),
                      awful.button({ }, 4, function ()
                                               awful.client.focus.byidx(1)
-                                              if client.focus then client.focus:raise() end
+                                              delay_raise()
                                           end),
                      awful.button({ }, 5, function ()
                                               awful.client.focus.byidx(-1)
-                                              if client.focus then client.focus:raise() end
+                                              delay_raise()
                                           end))
 
 for s = 1, screen.count() do
@@ -266,8 +286,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "l",      function () awful.util.spawn_with_shell("dm-tool lock")  end),
 
     -- Print screen
-    awful.key({                   }, "Print", function () awful.util.spawn_with_shell("import -frame ~/screenshots/$(date +%F_%H:%M:%S).png") end),
-    awful.key({ modkey,           }, "Print", function () awful.util.spawn_with_shell("import -window root ~/screenshots/$(date +%F_%H:%M:%S).png") end),
+    awful.key({                   }, "Print", function () awful.util.spawn_with_shell("import -frame ~/screenshots/$(date +%F_%H-%M-%S).png") end),
+    awful.key({ modkey,           }, "Print", function () awful.util.spawn_with_shell("import -window root ~/screenshots/$(date +%F_%H-%M-%S).png") end),
     
     -- Multi monitors manipulation
     awful.key({modkey,            }, "F1",     function () awful.screen.focus(1) end),
@@ -283,12 +303,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
+            delay_raise()
         end),
     awful.key({ modkey,           }, "k",
         function ()
             awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
+            delay_raise()
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
@@ -301,9 +321,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Tab",
         function ()
             awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
+            delay_raise()
         end),
 
     -- Standard program
@@ -508,9 +526,10 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.util.spawn_with_shell("volti")
 --awful.util.spawn_with_shell("wicd-client")
 
+-- Mouse sensetive 
+awful.util.spawn_with_shell("xset m 1/2 4")
+
 -- Xrandr 3-monitor setup
 --awful.util.spawn_with_shell("xrandr --output eDP1 --off")
-awful.util.spawn_with_shell("xrandr --output DP1-1 --right-of HDMI1 --mode 1920x1080")
-awful.util.spawn_with_shell("xrandr --output DP1-2 --right-of DP1-1 --mode 1920x1080")
-awful.util.spawn_with_shell("xrandr --output DP1-2 --rotate right")
-awful.util.spawn_with_shell("xrandr --output HDMI1 --rotate left")
+awful.util.spawn_with_shell("xrandr --output DP-1-1 --right-of HDMI-1 --mode 1920x1200")
+awful.util.spawn_with_shell("xrandr --output DP-1-2 --right-of DP-1-1 --mode 1920x1200")

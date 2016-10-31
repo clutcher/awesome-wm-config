@@ -8,7 +8,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper = "/home/clutcher/.config/awesome/themes/my/Programers/code.jpg"
+theme.wallpaper = "/home/clutcher/.config/awesome/themes/my/Programers/python_code.jpg"
 -- }}}
 
 -- {{{ Styles
