@@ -2,10 +2,13 @@
 
 ########### Install everything #############
 sudo apt install \
- gnome-terminal git libglib2.0-bin \
- imagemagick \
+ libglib2.0-bin \
+ mc imagemagick \
+ git openvpn \
  pavucontrol acpid xbacklight \
- slock network-manager blueman
+ slock \
+ network-manager blueman \
+ gnome-terminal nautilus
 
 
 # systemctl enable acpid

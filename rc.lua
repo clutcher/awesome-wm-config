@@ -261,7 +261,7 @@ globalkeys = my_table.join(
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
-    awful.key({modkey }, "l", function () os.execute(scrlocker) end,
+    awful.key({modkey, }, "l", function () os.execute(scrlocker) end,
               {description = "lock screen", group = "hotkeys"}),
 
     -- Hotkeys
