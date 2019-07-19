@@ -1,44 +1,33 @@
 #!/bin/bash
-#Set environment
 
-sudo apt-get install aptitude
-sudo aptitude install gnome-terminal volti imagemagick
-sudo aptitude install git mercurial
-sudo aptitude install libglib2.0-bin
-sudo aptitude install dconf-editor
+########### Install everything #############
+sudo apt install \
+ gnome-terminal git libglib2.0-bin \
+ imagemagick \
+ pavucontrol acpid xbacklight \
+ slock network-manager blueman
 
-cp -r gtk ~/.themes
+
+# systemctl enable acpid
+
+# Install some sound applet?
+
+
+# Install vscode?
 
 ########### GNOME settings #############
-#gtk2
-gconftool-2 --type=string --set /desktop/gnome/interface/gtk_theme "zenburn"
-#metacity
-gconftool-2 --type=string --set /apps/metacity/general/theme "zenburn"
-
-#gtk3
-#gsettings set org.gnome.desktop.interface gtk-theme "zenburn"
-#gsettings set org.gnome.desktop.wm.preferences theme "zenburn"
-
 cat <<EOT > ~/.config/gtk-3.0/settings.ini
 [Settings]
 gtk-application-prefer-dark-theme=1
 EOT
 
-######## Gnome terminal settings ##########
 
-
-######## Sublime install ########
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
-sudo apt-get update && sudo apt-get install sublime-text-installer
-echo "################"
-echo "Please edit /etc/apt/sources.list.d/ to get it work properly"
-
-cp -r sublime-text-3 ~/.config
-
-######## Fix xkb keyboard bug #########
+######## Fix xkb keyboard bug to forcly use US language when using hotkeys #########
 xkbcomp $DISPLAY - | egrep -v 'group . = AltGr;' | xkbcomp - $DISPLAY
 
-######## Fix Java bugs ##########
+######## Fix Java bugs with floating IDEA ##########
+######## https://superuser.com/questions/999486/prevent-my-ide-to-become-floating-in-awesome-wm ##########
+
 IRONIC_WM_NAME="Sawfish"
 NET_WIN=$(xprop -root _NET_SUPPORTING_WM_CHECK | awk -F "# " '{print $2}')
 
@@ -53,4 +42,7 @@ else
     xprop -root -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
 fi
 
+######## Awesome config ##########
+cp ../rc.lua ~/.config/awesome
 
+mkdir -p ~/screenshots
