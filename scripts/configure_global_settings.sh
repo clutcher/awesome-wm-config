@@ -5,3 +5,7 @@ cat <<EOT > ~/.config/gtk-3.0/settings.ini
 [Settings]
 gtk-application-prefer-dark-theme=1
 EOT
+
+# Git settings
+git config --global user.name "clutcher"
+git config --global user.email "iclutcher@gmail.com"

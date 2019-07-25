@@ -3,7 +3,7 @@
 sudo apt update
 
 source scripts/setup_awesome.sh
-source scripts/configure_gnome.sh
+source scripts/configure_global_settings.sh
 source scripts/configure_backlight.sh
 
 source scripts/install_mysql.sh
