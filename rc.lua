@@ -107,7 +107,7 @@ local guieditor    = "atom"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
-awful.util.tagnames = {"www", "dev", "term", "text", "misc"}
+awful.util.tagnames = {}
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.fair.horizontal,
@@ -177,6 +177,9 @@ lain.layout.cascade.tile.nmaster       = 5
 lain.layout.cascade.tile.ncol          = 2
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+
+-- Change tag layout set via theme
+awful.tag({"www", "dev", "term", "text", "misc"}, s, awful.layout.layouts[1])
 -- }}}
 
 -- {{{ Menu
@@ -434,6 +437,18 @@ globalkeys = my_table.join(
         end,
         {description = "volume up", group = "hotkeys"}),
     awful.key({ altkey }, "Down",
+        function ()
+            os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
+            beautiful.volume.update()
+        end,
+        {description = "volume down", group = "hotkeys"}),
+    awful.key({ }, "XF86AudioRaiseVolume",
+        function ()
+            os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
+            beautiful.volume.update()
+        end,
+        {description = "volume up", group = "hotkeys"}),
+    awful.key({ }, "XF86AudioLowerVolume",
         function ()
             os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
             beautiful.volume.update()
