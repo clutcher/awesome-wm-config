@@ -14,7 +14,7 @@ sudo apt install \
 # Use copycats theme with minor customizations
 rm -rf ~/.config/awesome
 git clone --recursive --depth 1 --single-branch https://github.com/lcpz/awesome-copycats.git ~/.config/awesome
-cp ../rc.lua ~/.config/awesome
+cp rc.lua ~/.config/awesome/rc.lua
 
 # Create directory to store screenshots
 mkdir -p ~/screenshots
