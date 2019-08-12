@@ -63,6 +63,8 @@ end
 --awful.util.spawn_with_shell("xscreensaver -nosplash &")
 -- Mouse sensetive
 awful.util.spawn_with_shell("xset m 1/2 4")
+-- Disable pc beep
+awful.util.spawn_with_shell("xset b off")
 
 --awful.util.spawn("nm-applet")
 --awful.util.spawn("blueman-manager")
