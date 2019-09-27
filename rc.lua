@@ -69,7 +69,7 @@ awful.util.spawn_with_shell("xset b off")
 --awful.util.spawn("nm-applet")
 --awful.util.spawn("blueman-manager")
 
-run_once({"nm-applet","blueman-manager","unclutter -root" }) -- entries must be separated by commas
+run_once({"nm-applet","blueman-applet","unclutter -root" }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
 --[[
