@@ -9,7 +9,8 @@ sudo apt install \
  libglib2.0-bin apt-transport-https \
  mc imagemagick curl zip \
  git openvpn \
- pavucontrol network-manager blueman gnome-terminal nautilus
+ pavucontrol network-manager blueman gnome-terminal nautilus \
+ gthumb
 
 # Use copycats theme with minor customizations
 rm -rf ~/.config/awesome
