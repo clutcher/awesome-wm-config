@@ -9,7 +9,8 @@ source scripts/configure_backlight.sh
 
 source scripts/install_mysql.sh
 
-source scripts/install_vscode.sh
+#source scripts/install_vscode.sh
+source scripts/install_sublime.sh
 source scripts/install_intellij.sh
 
 source scripts/install_java.sh
