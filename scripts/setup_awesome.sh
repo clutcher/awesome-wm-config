@@ -6,11 +6,12 @@ sudo apt install awesome awesome-extra lightdm slock
 
 # Install minimal packages for comport work
 sudo apt install \
- libglib2.0-bin apt-transport-https \
- mc imagemagick curl zip \
- git openvpn \
- pavucontrol network-manager blueman gnome-terminal nautilus \
- gthumb
+  libglib2.0-bin apt-transport-https \
+  mc imagemagick curl zip \
+  git openvpn \
+  pavucontrol blueman gnome-terminal nautilus \
+  network-manager network-manager-gnome \
+  gthumb
 
 # Use copycats theme with minor customizations
 rm -rf ~/.config/awesome
@@ -28,12 +29,12 @@ IRONIC_WM_NAME="Sawfish"
 NET_WIN=$(xprop -root _NET_SUPPORTING_WM_CHECK | awk -F "# " '{print $2}')
 
 if [[ "$NET_WIN" == 0x* ]]; then
-    # xprop cannot reliably set UTF8_STRING, so we replace as string.
-    # fortunately, jdk is OK with this, but wm-spec says use UTF8_STRING.
-    xprop -id "$NET_WIN" -remove _NET_WM_NAME
-    xprop -id "$NET_WIN" -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
+  # xprop cannot reliably set UTF8_STRING, so we replace as string.
+  # fortunately, jdk is OK with this, but wm-spec says use UTF8_STRING.
+  xprop -id "$NET_WIN" -remove _NET_WM_NAME
+  xprop -id "$NET_WIN" -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
 else
-    # even if we're not net compatible, do java workaround
-    xprop -root -remove _NET_WM_NAME
-    xprop -root -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
+  # even if we're not net compatible, do java workaround
+  xprop -root -remove _NET_WM_NAME
+  xprop -root -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
 fi
