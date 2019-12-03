@@ -102,14 +102,16 @@ local chosen_theme = themes[7]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "gnome-terminal"
+local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
+local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nano"
 local gui_editor   = "gvim"
-local browser      = "firefox"
-local guieditor    = "atom"
+local browser      = "chromium"
+local guieditor    = "subl"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
-awful.util.tagnames = {}
+awful.util.tagnames = {"www", "dev", "term", "text", "misc"}
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.fair.horizontal,
@@ -180,8 +182,8 @@ lain.layout.cascade.tile.ncol          = 2
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
--- Change tag layout set via theme
-awful.tag({"www", "dev", "term", "text", "misc"}, s, awful.layout.layouts[1])
+-- Change tag layout set via theme. Now it is set in theme.lua to support multimonitor
+-- awful.tag({"www", "dev", "term", "text", "misc"}, s, awful.layout.layouts[1])
 -- }}}
 
 -- {{{ Menu
@@ -341,23 +343,37 @@ globalkeys = my_table.join(
               {description = "jump to urgent client", group = "client"}),
     awful.key({ modkey,           }, "Tab",
         function ()
+            if cycle_prev then
             awful.client.focus.history.previous()
+            else
+                awful.client.focus.byidx(-1)
+            end
             if client.focus then
                 client.focus:raise()
             end
         end,
-        {description = "go back", group = "client"}),
-
-    -- Show/Hide Wibox
-    awful.key({ modkey }, "b", function ()
-            for s in screen do
-                s.mywibox.visible = not s.mywibox.visible
-                if s.mybottomwibox then
-                    s.mybottomwibox.visible = not s.mybottomwibox.visible
+        {description = "cycle with previous/go back", group = "client"}),
+    awful.key({ modkey, "Shift"   }, "Tab",
+        function ()
+            if cycle_prev then
+                awful.client.focus.byidx(1)
+                if client.focus then
+                    client.focus:raise()
                 end
             end
         end,
-        {description = "toggle wibox", group = "awesome"}),
+        {description = "go forth", group = "client"}),
+
+    -- Show/Hide Wibox
+    -- awful.key({ modkey }, "b", function ()
+    --         for s in screen do
+    --             s.mywibox.visible = not s.mywibox.visible
+    --             if s.mybottomwibox then
+    --                 s.mybottomwibox.visible = not s.mybottomwibox.visible
+    --             end
+    --         end
+    --     end,
+    --     {description = "toggle wibox", group = "awesome"}),
 
     -- On the fly useless gaps change
     awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end,
@@ -515,16 +531,16 @@ globalkeys = my_table.join(
     --    {description = "mpc on/off", group = "widgets"}),
 
     -- Copy primary to clipboard (terminals to gtk)
-    awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
-              {description = "copy terminal to gtk", group = "hotkeys"}),
+    -- awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
+    --           {description = "copy terminal to gtk", group = "hotkeys"}),
     -- Copy clipboard to primary (gtk to terminals)
-    awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
-              {description = "copy gtk to terminal", group = "hotkeys"}),
+    -- awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
+    --           {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ modkey }, "q", function () awful.spawn(browser) end,
+    awful.key({ modkey }, "b", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
-    awful.key({ modkey }, "a", function () awful.spawn(guieditor) end,
+    awful.key({ modkey }, "e", function () awful.spawn(guieditor) end,
               {description = "run gui editor", group = "launcher"}),
 
     -- Default
@@ -697,38 +713,38 @@ awful.rules.rules = {
       properties = { titlebars_enabled = false } },
 
     -- Set Firefox to always map on the first tag on screen 1.
-    { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = awful.util.tagnames[1] } },
+    -- { rule = { class = "Firefox" },
+    --   properties = { screen = 1, tag = awful.util.tagnames[1] } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
 
     -- Intellij IDEA fix!  
-    { 
-    	rule = {
-			class = "jetbrains-.*",
-			instance = "sun-awt-X11-XWindowPeer",
-			name = "win.*"
-	},
-  		properties = {
-	        floating = true,
-	        focus = true,
-	        focusable = false,
-	        ontop = true,
-	        placement = awful.placement.restore,
-	        buttons = {}
- 		}
-    },
-    {
-      rule = {
-        class = "jetbrains-idea",
-        instance = "sun-awt-X11-XDialogPeer"
-      }, 
-      properties = {
-        floating = true,
-        focus = true
-      }
-    }
+ --    { 
+ --    	rule = {
+	-- 		class = "jetbrains-.*",
+	-- 		instance = "sun-awt-X11-XWindowPeer",
+	-- 		name = "win.*"
+	-- },
+ --  		properties = {
+	--         floating = true,
+	--         focus = true,
+	--         focusable = false,
+	--         ontop = true,
+	--         placement = awful.placement.restore,
+	--         buttons = {}
+ -- 		}
+ --    },
+ --    {
+ --      rule = {
+ --        class = "jetbrains-idea",
+ --        instance = "sun-awt-X11-XDialogPeer"
+ --      }, 
+ --      properties = {
+ --        floating = true,
+ --        focus = true
+ --      }
+ --    }
 }
 -- }}}
 
@@ -797,7 +813,7 @@ end)
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = true})
+    c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
