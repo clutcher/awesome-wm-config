@@ -105,7 +105,7 @@ local terminal     = "gnome-terminal"
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nano"
-local gui_editor   = "gvim"
+local gui_editor   = "subl"
 local browser      = "google-chrome"
 local guieditor    = "subl"
 local scrlocker    = "slock"
@@ -117,6 +117,7 @@ awful.layout.layouts = {
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.floating,
 }
+
 awful.util.taglist_buttons = my_table.join(
     awful.button({ }, 1, function(t) t:view_only() end),
     awful.button({ modkey }, 1, function(t)
