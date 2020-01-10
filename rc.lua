@@ -106,7 +106,7 @@ local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awe
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nano"
 local gui_editor   = "gvim"
-local browser      = "chromium"
+local browser      = "google-chrome"
 local guieditor    = "subl"
 local scrlocker    = "slock"
 

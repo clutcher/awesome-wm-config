@@ -4,7 +4,7 @@
 sudo apt install awesome awesome-extra lightdm slock
 # sudo apt purge gnome* gdm3
 
-# Install minimal packages for comport work
+# Install minimal packages for comfort work
 sudo apt install \
   libglib2.0-bin apt-transport-https \
   mc imagemagick curl zip \
