@@ -11,7 +11,7 @@ sudo apt install \
   git openvpn \
   pavucontrol blueman gnome-terminal nautilus \
   network-manager network-manager-gnome \
-  gthumb
+  nomacs
 
 # Use copycats theme with minor customizations
 rm -rf ~/.config/awesome
@@ -21,7 +21,7 @@ cp rc.lua ~/.config/awesome/rc.lua
 # Create directory to store screenshots
 mkdir -p ~/screenshots
 
-# Fix xkb keyboard bug to forcly use US language when using hotkeys
+# Fix xkb keyboard bug to forcefully use US language when using hotkeys
 xkbcomp $DISPLAY - | egrep -v 'group . = AltGr;' | xkbcomp - $DISPLAY
 
 # Fix Java bugs with floating IDEA (https://superuser.com/questions/999486/prevent-my-ide-to-become-floating-in-awesome-wm)
