@@ -107,6 +107,7 @@ local cycle_prev   = true -- cycle trough all previous client or just the first 
 local editor       = os.getenv("EDITOR") or "nano"
 local gui_editor   = "subl"
 local browser      = "google-chrome"
+local idea         = "idea"
 local guieditor    = "subl"
 local scrlocker    = "slock"
 
@@ -543,6 +544,8 @@ globalkeys = my_table.join(
               {description = "run browser", group = "launcher"}),
     awful.key({ modkey }, "e", function () awful.spawn(guieditor) end,
               {description = "run gui editor", group = "launcher"}),
+    awful.key({ modkey }, "i", function () awful.spawn(idea) end,
+          {description = "run intellij idea", group = "launcher"}),
 
     -- Default
     --[[ Menubar
