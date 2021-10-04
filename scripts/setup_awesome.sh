@@ -6,7 +6,9 @@ sudo apt install awesome awesome-extra lightdm slock
 
 # Install minimal packages for comfort work
 sudo apt install \
-  libglib2.0-bin apt-transport-https \
+  libnotify-bin libglib2.0-bin \
+  firmware-linux \
+  apt-transport-https \
   mc imagemagick curl zip \
   git openvpn \
   pavucontrol blueman gnome-terminal nautilus \
