@@ -19,3 +19,4 @@ source scripts/install_java.sh
 source scripts/install_nodejs.sh
 
 source scripts/install_docker.sh
+source scripts/install_insync.sh
