@@ -6,7 +6,7 @@ cat <<EOT > ~/.config/gtk-3.0/settings.ini
 gtk-application-prefer-dark-theme=1
 EOT
 
-# Nautilus folders settings
+# System folders settings
 cat <<EOT > ~/.config/user-dirs.dirs
 XDG_DOWNLOAD_DIR="$HOME/Downloads"
 XDG_DOCUMENTS_DIR="$HOME/projects"
