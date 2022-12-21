@@ -69,7 +69,7 @@ awful.util.spawn_with_shell("xset b off")
 --awful.util.spawn("nm-applet")
 --awful.util.spawn("blueman-manager")
 
-run_once({"nm-applet","blueman-applet","unclutter -root" }) -- entries must be separated by commas
+run_once({"nm-applet","blueman-applet","unclutter -root", "insync start" }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
 --[[
@@ -112,7 +112,7 @@ local guieditor    = "subl"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
-awful.util.tagnames = {"www", "dev", "term", "text", "misc"}
+awful.util.tagnames = {"www", "ide", "pkb", "text", "msg", "pvt"}
 awful.layout.layouts = {
     awful.layout.suit.tile,
     awful.layout.suit.fair.horizontal,
@@ -722,33 +722,6 @@ awful.rules.rules = {
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
-
-    -- Intellij IDEA fix!  
- --    { 
- --    	rule = {
-	-- 		class = "jetbrains-.*",
-	-- 		instance = "sun-awt-X11-XWindowPeer",
-	-- 		name = "win.*"
-	-- },
- --  		properties = {
-	--         floating = true,
-	--         focus = true,
-	--         focusable = false,
-	--         ontop = true,
-	--         placement = awful.placement.restore,
-	--         buttons = {}
- -- 		}
- --    },
- --    {
- --      rule = {
- --        class = "jetbrains-idea",
- --        instance = "sun-awt-X11-XDialogPeer"
- --      }, 
- --      properties = {
- --        floating = true,
- --        focus = true
- --      }
- --    }
 }
 -- }}}
 
