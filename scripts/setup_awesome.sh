@@ -10,7 +10,7 @@ sudo apt install \
   firmware-linux \
   apt-transport-https \
   mc imagemagick curl zip \
-  git openvpn \
+  git git-lfs openvpn \
   pavucontrol blueman gnome-terminal nautilus \
   network-manager network-manager-gnome \
   nomacs
