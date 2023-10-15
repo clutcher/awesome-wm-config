@@ -3,6 +3,7 @@
 sudo apt update
 
 # Minimal install and hardware configuration
+source scripts/setup_debian_repository.sh
 source scripts/setup_hardware_and_cli.sh
 source scripts/configure_backlight.sh
 ## source scripts/configure_touchpad.sh
