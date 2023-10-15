@@ -25,12 +25,8 @@ sudo apt install imagemagick
 # Image viewer
 sudo apt install nomacs
 
-# Setup theme
-sudo apt install orchis-gtk-theme --no-install-recommends
-xfconf-query -c xsettings -p /Net/ThemeName -s "Orchis"
-
-# Setup icons
-git clone https://github.com/bikass/kora.git /tmp/icons/kora
-mkdir -p ~/.local/share/icons
-mv /tmp/icons/kora/kora ~/.local/share/icons/kora
-mv /tmp/icons/kora/kora-pgrey ~/.local/share/icons/kora-pgrey
+# Setup theme and icons
+sudo apt install yaru-theme-gtk yaru-theme-icon
+xfconf-query -c xsettings -p /Net/ThemeName -s "Yaru-sage-dark"
+xfconf-query -c xsettings -p /Net/IconThemeName -s "Yaru-sage-dark"
+sudo gtk-update-icon-cache /usr/share/icons/Yaru-sage-dark/

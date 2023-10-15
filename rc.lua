@@ -82,7 +82,7 @@ awful.util.spawn_with_shell("xset b off")
 --awful.util.spawn("blueman-manager")
 
 run_once({
-    "picom",
+    "picom --daemon",
     "unclutter -root",
 
     "xfsettingsd",
