@@ -2,12 +2,7 @@
 
 sudo apt remove docker docker-engine docker.io containerd runc
 
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common
-
-sudo mkdir -p /etc/apt/trusted.gpg.d/
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
-
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian bookworm stable"
 
 sudo apt update

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Install latest obsidian
 VER=$(curl --silent -qI https://github.com/obsidianmd/obsidian-releases/releases/latest | awk -F '/' '/^location/ {print  substr($NF, 1, length($NF)-1)}'); \
 wget https://github.com/obsidianmd/obsidian-releases/releases/download/$VER/obsidian_${VER#v}_amd64.deb -O /tmp/obsidian.deb
