@@ -1,0 +1,4 @@
+configuration {
+ modi: "drun";
+}
+@theme "rounded-gray-dark-centered"

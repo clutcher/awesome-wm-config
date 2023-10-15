@@ -1,19 +1,29 @@
 #!/bin/bash
 
-# Install awesome and login manager
-sudo apt install awesome awesome-extra lightdm slock
-# sudo apt purge gnome* gdm3
+# Install login manager
+sudo apt install lightdm
 
-# Install minimal packages for comfort work
-sudo apt install \
-  libnotify-bin libglib2.0-bin \
-  firmware-linux \
-  apt-transport-https \
-  mc imagemagick curl zip \
-  git git-lfs openvpn \
-  pavucontrol blueman gnome-terminal nautilus \
-  network-manager network-manager-gnome \
-  nomacs
+# Install awesomewm
+sudo apt install awesome awesome-extra
+#sudo apt purge gnome* gdm3
+
+# Additional tools used by copycats theme
+sudo apt install unclutter xsel xfonts-terminus
+
+# Install application runner with themes
+sudo apt install rofi picom fonts-roboto
+
+mkdir -p ~/.local/share/rofi/themes/
+curl -o ~/.local/share/rofi/themes/rounded-common.rasi https://raw.githubusercontent.com/newmanls/rofi-themes-collection/master/themes/rounded-common.rasi
+curl -o ~/.local/share/rofi/themes/rounded-gray-dark.rasi https://raw.githubusercontent.com/newmanls/rofi-themes-collection/master/themes/rounded-gray-dark.rasi
+bash -c 'cat > ~/.local/share/rofi/themes/rounded-gray-dark-centered.rasi' << EOF
+@import "rounded-gray-dark.rasi"
+
+window {
+    location: north;
+    y-offset: 21;
+}
+EOF
 
 # Use copycats theme with minor customizations
 rm -rf ~/.config/awesome
@@ -22,21 +32,3 @@ cp rc.lua ~/.config/awesome/rc.lua
 
 # Create directory to store screenshots
 mkdir -p ~/screenshots
-
-# Fix xkb keyboard bug to forcefully use US language when using hotkeys
-xkbcomp $DISPLAY - | egrep -v 'group . = AltGr;' | xkbcomp - $DISPLAY
-
-# Fix Java bugs with floating IDEA (https://superuser.com/questions/999486/prevent-my-ide-to-become-floating-in-awesome-wm)
-IRONIC_WM_NAME="Sawfish"
-NET_WIN=$(xprop -root _NET_SUPPORTING_WM_CHECK | awk -F "# " '{print $2}')
-
-if [[ "$NET_WIN" == 0x* ]]; then
-  # xprop cannot reliably set UTF8_STRING, so we replace as string.
-  # fortunately, jdk is OK with this, but wm-spec says use UTF8_STRING.
-  xprop -id "$NET_WIN" -remove _NET_WM_NAME
-  xprop -id "$NET_WIN" -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
-else
-  # even if we're not net compatible, do java workaround
-  xprop -root -remove _NET_WM_NAME
-  xprop -root -f _NET_WM_NAME 8s -set _NET_WM_NAME "$IRONIC_WM_NAME"
-fi

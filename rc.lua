@@ -69,7 +69,7 @@ awful.util.spawn_with_shell("xset b off")
 --awful.util.spawn("nm-applet")
 --awful.util.spawn("blueman-manager")
 
-run_once({"nm-applet","blueman-applet","unclutter -root", "insync start" }) -- entries must be separated by commas
+run_once({"nm-applet","blueman-applet","unclutter -root", "insync start", "xfsettingsd", "xfce4-power-manager", "xfce4-screensaver","picom" }) -- entries must be separated by commas
 
 -- This function implements the XDG autostart specification
 --[[
@@ -101,15 +101,14 @@ local themes = {
 local chosen_theme = themes[7]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "gnome-terminal"
+local terminal     = "xfce4-terminal"
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nano"
-local gui_editor   = "subl"
+local gui_editor   = "fleet"
 local browser      = "google-chrome"
 local idea         = "idea"
-local guieditor    = "subl"
-local scrlocker    = "slock"
+local scrlocker    = "xfce4-screensaver-command --lock"
 
 awful.util.terminal = terminal
 awful.util.tagnames = {"www", "ide", "pkb", "text", "msg", "pvt"}
@@ -542,7 +541,7 @@ globalkeys = my_table.join(
     -- User programs
     awful.key({ modkey }, "b", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
-    awful.key({ modkey }, "e", function () awful.spawn(guieditor) end,
+    awful.key({ modkey }, "e", function () awful.spawn(gui_editor) end,
               {description = "run gui editor", group = "launcher"}),
     awful.key({ modkey }, "i", function () awful.spawn(idea) end,
           {description = "run intellij idea", group = "launcher"}),
@@ -569,8 +568,8 @@ globalkeys = my_table.join(
         {description = "show rofi", group = "launcher"}),
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey }, "r", function () awful.util.spawn("rofi -show drun -show-icons") end,
+              {description = "run rofi", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
