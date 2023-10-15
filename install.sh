@@ -15,6 +15,9 @@ source scripts/install_chrome.sh
 # Copy and replace dotfiles
 cp -rf dotfiles/* ~/.config/
 
+# Copy configs
+cp -f configs/bash/.bash_aliases ~/
+
 source scripts/install_java.sh
 source scripts/install_nodejs.sh
 
