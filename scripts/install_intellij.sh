@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo cp configs/60-jetbrains.conf /etc/sysctl.d/60-jetbrains.conf
+sudo cp configs/sysctl/60-jetbrains.conf /etc/sysctl.d/60-jetbrains.conf
 sudo sysctl --system
 
 sudo mkdir -p /opt/idea
