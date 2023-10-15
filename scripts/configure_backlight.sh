@@ -4,7 +4,7 @@
 sudo apt install \
  acpid acpi-support xbacklight \
 
-# systemctl enable acpid
+systemctl enable acpid
 
 # Add support for intel graphics backlight support (includes support of media buttons)
 sudo tee /usr/share/X11/xorg.conf.d/20-intel.conf > /dev/null <<EOF
