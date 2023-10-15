@@ -10,6 +10,6 @@ EOT
 # Generate new ssh keys
 ssh-keygen -t rsa -C "iclutcher@gmail.com" -f ~/.ssh/id_rsa -q -N ""
 
-# Git 9settings
+# Git settings
 git config --global user.name "Igor Zarvanskyi"
 git config --global user.email "iclutcher@gmail.com"
