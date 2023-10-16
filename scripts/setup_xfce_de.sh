@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install xfce4 DE
-sudo apt install xfce4-power-manager xfce4-settings xfce4-taskmanager gnome-keyring polkit-gnome
+sudo apt install xfce4-power-manager xfce4-settings xfce4-taskmanager gnome-keyring
 
 # Install screen locker
 sudo apt install xfce4-screensaver
@@ -10,7 +10,7 @@ sudo apt install xfce4-screensaver
 sudo apt install libnotify-bin xfce4-notifyd
 
 # File manager
-sudo apt install thunar thunar-archive-plugin  gir1.2-thunarx-3.0 insync-thunar
+sudo apt install thunar thunar-archive-plugin  gir1.2-thunarx-3.0
 xdg-mime default thunar.desktop inode/directory application/x-gnome-saved-search
 
 # GUI for hardware connection
