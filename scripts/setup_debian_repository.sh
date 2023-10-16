@@ -3,7 +3,7 @@
 # Switch on debian sid repository
 sudo tee /etc/apt/sources.list > /dev/null <<EOF
 deb http://deb.debian.org/debian/ sid main non-free non-free-firmware contrib
-deb-src http://deb.debian.org/debian/ sid main non-free non-free-firmware contrib
+# deb-src http://deb.debian.org/debian/ sid main non-free non-free-firmware contrib
 EOF
 
 # Update system
