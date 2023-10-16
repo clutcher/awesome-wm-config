@@ -7,5 +7,5 @@ wget https://github.com/obsidianmd/obsidian-releases/releases/download/$VER/obsi
 sudo dpkg -i /tmp/obsidian.deb
 
 # Clone PKM
-mkdir -p ~/insync/knowledge
-git clone https://github.com/clutcher/knowledge.git ~/insync/knowledge/
+#mkdir -p ~/insync/knowledge
+#git clone https://github.com/clutcher/knowledge.git ~/insync/knowledge/
