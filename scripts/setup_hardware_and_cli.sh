@@ -4,7 +4,7 @@
 sudo apt install mc jq zip curl wget \
     git git-lfs imagemagick openvpn \
     net-tools \
-    fonts-noto-color-emoji
+    fonts-noto-core fonts-noto-color-emoji
 
 sudo fc-cache -fv
 
