@@ -86,11 +86,15 @@ function __autocompletion() {
     return 0
 }
 
-complete -F __autocompletion launch
 
+# Main
+
+complete -F __autocompletion launch
 export -f launch
 
-# Fix
+# Util methods
+
+## Fix
 
 function __fix_automation_containers() {
     docker stop $(docker ps -aq)
@@ -103,7 +107,7 @@ function __fix_monitors() {
         --output DP2-2 --right-of DP2-1-5 --mode 1920x1200
 }
 
-# Docker
+## Docker
 
 function __missing_docker_container() {
     local container_name=$1
@@ -128,7 +132,7 @@ function __docker_run_trek() {
     docker run --name mssql-trek -d -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=SApwdForDB1.' -p 1433:1433 -v /home/clutcher/db/mssql/data:/var/opt/mssql/data -v /home/clutcher/db/mssql/log:/var/opt/mssql/log -v /home/clutcher/db/mssql/secrets:/var/opt/mssql/secrets mcr.microsoft.com/mssql/server:2017-latest
 }
 
-# Tunnel
+## Tunnel
 
 function __tunnel_trek() {
     source ~/.trek_aliases
