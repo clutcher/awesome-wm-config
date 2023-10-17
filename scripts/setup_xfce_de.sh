@@ -14,7 +14,7 @@ sudo apt install thunar thunar-archive-plugin  gir1.2-thunarx-3.0
 xdg-mime default thunar.desktop inode/directory application/x-gnome-saved-search
 
 # GUI for hardware connection
-sudo apt install network-manager-gnome blueman
+sudo apt install network-manager-gnome blueman pavucontrol
 
 # Install terminal
 sudo apt install xfce4-terminal
