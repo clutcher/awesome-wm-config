@@ -1,0 +1,2 @@
+# Allows web via.app access usb keyboard to change layouts
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users"
