@@ -81,7 +81,11 @@ awful.util.spawn_with_shell("xset b off")
 --awful.util.spawn("nm-applet")
 --awful.util.spawn("blueman-manager")
 
+
 run_once({
+    -- Used for git operation (clone, fetch etc) with ssh method
+    "ssh-add ~/.ssh/id_rsa",
+
     "picom --daemon",
     "unclutter -root",
 
