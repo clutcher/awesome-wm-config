@@ -220,6 +220,28 @@ beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv
 
 -- }}}
 
+-- {{{ Notifications
+
+beautiful.notification_max_width = 500
+naughty.config.defaults['icon_size'] = 25
+
+local show_volume_notification = function()
+    local get_volume_level = "sleep 0.1 ; amixer get Master | grep -Po '[0-9]+(?=%)' | head -1"
+    awful.spawn.easy_async_with_shell(get_volume_level, function(out)
+        naughty.notify({
+            text = "Volume: " .. out,
+            timeout = 1,
+            preset = naughty.config.presets.critical,
+            height = 20,
+            position = "top_right",
+            replaces_id = -1
+        })
+    end)
+end
+
+--- }}}
+
+
 -- {{{ Menu
 
 -- Create a launcher widget and a main menu
@@ -544,12 +566,14 @@ globalkeys = mytable.join(
                 function()
                     os.execute(string.format("amixer -q set %s 5%%+", beautiful.volume.channel))
                     beautiful.volume.update()
+                    show_volume_notification()
                 end,
                 { description = "volume up", group = "hotkeys" }),
         awful.key({  }, "XF86AudioLowerVolume",
                 function()
                     os.execute(string.format("amixer -q set %s 5%%-", beautiful.volume.channel))
                     beautiful.volume.update()
+                    show_volume_notification()
                 end,
                 { description = "volume down", group = "hotkeys" }),
         awful.key({  }, "XF86AudioMute",
