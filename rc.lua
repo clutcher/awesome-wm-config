@@ -344,25 +344,25 @@ globalkeys = mytable.join(
         end),
 
 -- Multi monitors manipulation
-        awful.key({ modkey, }, "F1", function()
+        awful.key({ "Ctrl" }, "1", function()
             awful.screen.focus(1)
         end),
-        awful.key({ modkey, }, "F2", function()
+        awful.key({ "Ctrl" }, "2", function()
             awful.screen.focus(2)
         end),
-        awful.key({ modkey, }, "F3", function()
+        awful.key({ "Ctrl" }, "3", function()
             awful.screen.focus(3)
         end),
-        awful.key({ modkey, "Shift" }, "F1", function()
+        awful.key({ modkey, "Shift" }, "1", function()
             awful.client.movetoscreen(c, 1)
         end),
-        awful.key({ modkey, "Shift" }, "F2", function()
+        awful.key({ modkey, "Shift" }, "2", function()
             awful.client.movetoscreen(c, 2)
         end),
-        awful.key({ modkey, "Shift" }, "F3", function()
+        awful.key({ modkey, "Shift" }, "3", function()
             awful.client.movetoscreen(c, 3)
         end),
-        awful.key({ modkey }, "`", awful.client.movetoscreen),
+        awful.key({ modkey }, "Escape", awful.client.movetoscreen),
 
 
 -- Destroy all notifications
@@ -384,9 +384,6 @@ globalkeys = mytable.join(
                 { description = "view previous", group = "tag" }),
         awful.key({ modkey, }, "Right", awful.tag.viewnext,
                 { description = "view next", group = "tag" }),
-        awful.key({ modkey, }, "Escape", awful.tag.history.restore,
-                { description = "go back", group = "tag" }),
-
 
 -- Default client focus
         awful.key({ modkey, }, "j",
