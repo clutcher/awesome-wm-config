@@ -1,0 +1,30 @@
+# Used for development of SAP Commerce (Hybris) projects
+
+cd() {
+    # Use the built-in cd command to change directories
+    command cd "$@" || return
+
+    # Check for the existence of setantenv.sh in the first path
+    if [ -f "./hybris/bin/platform/setantenv.sh" ]; then
+        local script_path="./hybris/bin/platform/setantenv.sh"
+    # If not found, check the second path
+    elif [ -f "./core-customize/hybris/bin/platform/setantenv.sh" ]; then
+        local script_path="./core-customize/hybris/bin/platform/setantenv.sh"
+    fi
+
+    # If a valid path is found, source the script
+    if [ -n "$script_path" ]; then
+        local script_dir="$(dirname "$script_path")"
+        echo "Sourcing setantenv.sh from $(pwd)/${script_path#./}"
+        command cd "$script_dir" || return
+        source "$(basename "$script_path")" > /dev/null
+        command cd - >/dev/null || return
+
+        # Check if complete-ant-cmd.pl exists and has executable permissions, if not, fix them
+        local ant_script="/home/clutcher/projects/strongtie-pcm/hybris/bin/platform/apache-ant/bin/complete-ant-cmd.pl"
+        if [ -f "$ant_script" ] && [ ! -x "$ant_script" ]; then
+            chmod +x "$ant_script"
+        fi
+    fi
+}
+
