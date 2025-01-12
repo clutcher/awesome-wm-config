@@ -28,6 +28,14 @@ function launch() {
                         docker start $container_name
                     fi
                     ;;
+                sst)
+                    local container_name=mssql-sst
+                    if __missing_docker_container $container_name; then
+                        __docker_run_sst
+                    else
+                        docker start $container_name
+                    fi
+                    ;;
                 trek)
                     local container_name=mssql-trek
                     if __missing_docker_container $container_name; then
@@ -67,7 +75,7 @@ function __autocompletion() {
             words="monitor automation"
             ;;
         docker)
-            words="swagelok trek"
+            words="swagelok trek sst"
             ;;
         tunnel)
             words="trek"
@@ -126,6 +134,10 @@ function __missing_docker_container() {
 
 function __docker_run_swagelok() {
     docker run --name mysql-swagelok -d -p 3306:3306 -v /home/clutcher/db/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=swagelock -e MYSQL_USER=hybris -e MYSQL_PASSWORD=Monkey1! mysql/mysql-server:5.7
+}
+
+function __docker_run_sst() {
+    docker run --name mssql-sst -d -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=SAPassw0rd' -p 1433:1433 -v /home/clutcher/db/mssql22/data:/var/opt/mssql/data -v /home/clutcher/db/mssql22/log:/var/opt/mssql/log -v /home/clutcher/db/mssql22/secrets:/var/opt/mssql/secrets mcr.microsoft.com/mssql/server:2022-latest
 }
 
 function __docker_run_trek() {
