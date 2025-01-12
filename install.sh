@@ -5,7 +5,11 @@ sudo apt update
 # Minimal install and hardware configuration
 source scripts/setup_debian_repository.sh
 source scripts/setup_hardware_and_cli.sh
+
+# Below installs the most recent kernel and firmware
+# This is a must have for recently release hardware (for example, laptop released less than year ago)
 #source scripts/install_linux_firmware_from_source.sh
+#source scripts/install_liquorix_kernel.sh
 
 source scripts/configure_backlight.sh
 ## source scripts/configure_touchpad.sh
