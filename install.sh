@@ -21,8 +21,7 @@ source scripts/setup_awesome.sh
 source scripts/setup_xfce_de.sh
 source scripts/install_chrome.sh
 
-cp -rf dotfiles/* ~/.config/
-cp -f configs/bash/.bash_aliases ~/
+source scripts/setup_dotfiles.sh
 
 # Dev tools
 source scripts/install_java.sh
