@@ -20,10 +20,10 @@ sudo apt install network-manager-gnome blueman pavucontrol
 sudo apt install xfce4-terminal
 
 # Install screenshot tool
-sudo apt install imagemagick
+sudo apt install imagemagick flameshot
 
 # Image viewer
-sudo apt install nomacs
+sudo apt install ristretto
 
 # Setup theme and icons
 sudo apt install yaru-theme-gtk yaru-theme-icon
