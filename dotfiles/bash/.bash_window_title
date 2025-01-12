@@ -1,0 +1,47 @@
+# Helper function to replace $HOME with ~ in a given path
+replace_home_with_tilde() {
+    local path="$1"
+    local home_path="$HOME"
+    if [[ "$path" == $home_path/* ]]; then
+        path="~${path#$home_path}"
+    fi
+    echo "$path"
+}
+
+# Function to set the full command line in the terminal title
+set_window_title_command() {
+    # Extract the full command including its flags
+    local command
+    command="${BASH_COMMAND}"
+
+    # Skip updating if the command is empty, or if it matches set_window_title functions, or if it is 'cd' or 'ls'
+    if [[ -z "$command" || "$command" == *set_window_title* || "$command" == cd* || "$command" == ls* ]]; then
+        return
+    fi
+
+    # Limit the length of the command to avoid overly long titles
+    command=$(echo "$command" | sed 's/^[ ]*//' | sed 's/[ \t]*$//')
+
+    # Get the current directory with ~ replacement
+    local dir
+    dir=$(replace_home_with_tilde "$PWD")
+
+    # Set the terminal title to the command and current directory
+    echo -ne "\033]0;${command} : ${dir}\007"
+}
+
+# Function to update the directory path in the terminal title
+set_window_title_directory() {
+    # Get the current directory with ~ replacement
+    local dir
+    dir=$(replace_home_with_tilde "$PWD")
+
+    # Set the terminal title to the directory
+    echo -ne "\033]0;${dir}\007"
+}
+
+# Trap to set command title before command execution
+trap 'set_window_title_command' DEBUG
+
+# Use PROMPT_COMMAND to update the directory title after command execution
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }set_window_title_directory"

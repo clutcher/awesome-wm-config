@@ -17,7 +17,7 @@ xdg-mime default thunar.desktop inode/directory application/x-gnome-saved-search
 sudo apt install network-manager-gnome blueman pavucontrol
 
 # Install terminal
-sudo apt install xfce4-terminal
+sudo apt install alacritty
 
 # Install screenshot tool
 sudo apt install imagemagick flameshot
