@@ -25,6 +25,10 @@ window {
 }
 EOF
 
+# Copy desktop files to add Shutdown and Reboot entries into Rofi drun menu
+mkdir -p ~/.local/share/applications/
+cp -rf configs/desktop/* ~/.local/share/applications/
+
 # Use copycats theme with minor customizations
 rm -rf ~/.config/awesome
 git clone --recursive --depth 1 --single-branch https://github.com/lcpz/awesome-copycats.git ~/.config/awesome
